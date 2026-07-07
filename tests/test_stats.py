@@ -193,6 +193,58 @@ class TestCli:
             text=True,
         )
 
+        expected = {
+            "word_count": 3,
+            "char_count": 15,
+            "sentence_count": 2,
+            "reading_time": 0.015,
+        }
+        assert result.returncode == 0
+        assert result.stderr == ""
+        assert result.stdout == json.dumps(expected) + "\n"
+        assert json.loads(result.stdout) == expected
+
+    def test_pretty_prints_indented_json_matching_compact(self, tmp_path):
+        import json
+        import subprocess
+        import sys
+
+        text_file = tmp_path / "sample.txt"
+        text_file.write_text("Hello world. Bye!", encoding="utf-8")
+
+        compact = subprocess.run(
+            [sys.executable, "-m", "textstats", str(text_file)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        pretty = subprocess.run(
+            [sys.executable, "-m", "textstats", "--pretty", str(text_file)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        assert pretty.returncode == 0
+        assert pretty.stderr == ""
+        assert json.loads(pretty.stdout) == json.loads(compact.stdout)
+        assert pretty.stdout == json.dumps(json.loads(compact.stdout), indent=2) + "\n"
+
+    def test_pretty_flag_may_follow_file_argument(self, tmp_path):
+        import json
+        import subprocess
+        import sys
+
+        text_file = tmp_path / "sample.txt"
+        text_file.write_text("Hello world. Bye!", encoding="utf-8")
+
+        result = subprocess.run(
+            [sys.executable, "-m", "textstats", str(text_file), "--pretty"],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
         assert result.returncode == 0
         assert result.stderr == ""
         assert json.loads(result.stdout) == {
@@ -201,6 +253,24 @@ class TestCli:
             "sentence_count": 2,
             "reading_time": 0.015,
         }
+
+    def test_unknown_argument_exits_with_usage_error(self, tmp_path):
+        import subprocess
+        import sys
+
+        text_file = tmp_path / "sample.txt"
+        text_file.write_text("Hello world.", encoding="utf-8")
+
+        result = subprocess.run(
+            [sys.executable, "-m", "textstats", "--unknown", str(text_file)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        assert result.returncode == 1
+        assert result.stdout == ""
+        assert result.stderr == "usage: python -m textstats [--pretty] <file>\n"
 
     def test_missing_file_exits_with_error(self, tmp_path):
         import subprocess
