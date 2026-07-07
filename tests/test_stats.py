@@ -11,6 +11,21 @@ class TestWordCount:
     def test_empty_string(self):
         assert word_count("") == 0
 
+    def test_multiple_spaces_do_not_create_words(self):
+        assert word_count("a  b") == 2
+
+    def test_newlines_separate_words(self):
+        assert word_count("a\nb") == 2
+
+    def test_leading_whitespace_is_ignored(self):
+        assert word_count("  lead") == 1
+
+    def test_tabs_separate_words(self):
+        assert word_count("a\tb") == 2
+
+    def test_whitespace_only_string(self):
+        assert word_count("  \n\t  ") == 0
+
 
 class TestCharCount:
     def test_excludes_spaces_by_default(self):

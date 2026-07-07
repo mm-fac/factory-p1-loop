@@ -6,9 +6,7 @@ def word_count(text: str) -> int:
 
     Words are separated by whitespace.
     """
-    if not text:
-        return 0
-    return len(text.split(" "))
+    return len(text.split())
 
 
 def char_count(text: str, include_spaces: bool = False) -> int:
