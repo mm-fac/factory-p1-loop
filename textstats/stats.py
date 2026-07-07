@@ -9,6 +9,17 @@ def word_count(text: str) -> int:
     return len(text.split())
 
 
+def average_word_length(text: str) -> float:
+    """Return the average word length in *text*.
+
+    Words are separated by whitespace.
+    """
+    words = text.split()
+    if not words:
+        return 0.0
+    return sum(len(word) for word in words) / len(words)
+
+
 def longest_word(text: str) -> str:
     """Return the longest word in *text*.
 
