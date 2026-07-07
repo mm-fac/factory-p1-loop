@@ -9,6 +9,16 @@ def word_count(text: str) -> int:
     return len(text.split())
 
 
+def reading_time(text: str, wpm: int = 200) -> float:
+    """Return the estimated reading time for *text* in minutes.
+
+    Reading time is based on words per minute.
+    """
+    if wpm <= 0:
+        raise ValueError("wpm must be greater than 0")
+    return word_count(text) / wpm
+
+
 def char_count(text: str, include_spaces: bool = False) -> int:
     """Return the number of characters in *text*.
 
