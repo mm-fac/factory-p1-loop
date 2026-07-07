@@ -36,6 +36,19 @@ def longest_word(text: str) -> str:
     return max(text.split(), key=len, default="")
 
 
+def most_common_word(text: str) -> str:
+    """Return the most frequent word in *text*.
+
+    Words are separated by whitespace and compared case-insensitively.
+    """
+    counts: dict[str, int] = {}
+    for word in text.split():
+        normalized = word.casefold()
+        counts[normalized] = counts.get(normalized, 0) + 1
+
+    return max(counts, key=counts.get, default="")
+
+
 def reading_time(text: str, wpm: int = 200) -> float:
     """Return the estimated reading time for *text* in minutes.
 

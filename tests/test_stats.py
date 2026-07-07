@@ -4,6 +4,7 @@ from textstats import (
     average_word_length,
     char_count,
     longest_word,
+    most_common_word,
     reading_time,
     sentence_count,
     unique_word_count,
@@ -77,6 +78,23 @@ class TestLongestWord:
 
     def test_whitespace_only_string(self):
         assert longest_word("  \n\t  ") == ""
+
+
+class TestMostCommonWord:
+    def test_returns_clear_winner(self):
+        assert most_common_word("red blue red green") == "red"
+
+    def test_counts_case_insensitively_and_returns_lowercase(self):
+        assert most_common_word("The the THE quick") == "the"
+
+    def test_tie_returns_earliest_first_occurrence(self):
+        assert most_common_word("beta alpha alpha beta") == "beta"
+
+    def test_empty_string(self):
+        assert most_common_word("") == ""
+
+    def test_whitespace_only_string(self):
+        assert most_common_word("  \n\t  ") == ""
 
 
 class TestReadingTime:
