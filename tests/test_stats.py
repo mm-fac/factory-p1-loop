@@ -6,6 +6,7 @@ from textstats import (
     longest_word,
     reading_time,
     sentence_count,
+    unique_word_count,
     word_count,
 )
 
@@ -34,6 +35,17 @@ class TestWordCount:
 
     def test_whitespace_only_string(self):
         assert word_count("  \n\t  ") == 0
+
+
+class TestUniqueWordCount:
+    def test_repeats_differing_only_by_case_count_once(self):
+        assert unique_word_count("The the THE quick") == 2
+
+    def test_all_unique_text(self):
+        assert unique_word_count("one two three") == 3
+
+    def test_empty_string(self):
+        assert unique_word_count("") == 0
 
 
 class TestAverageWordLength:
