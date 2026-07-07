@@ -88,6 +88,14 @@ def sentence_count(text: str) -> int:
     return max(count, 1)
 
 
+def line_count(text: str) -> int:
+    """Return the number of non-blank lines in *text*.
+
+    Lines containing only whitespace are excluded.
+    """
+    return sum(1 for line in text.splitlines() if line.strip())
+
+
 def paragraph_count(text: str) -> int:
     """Return the number of paragraphs in *text*.
 
