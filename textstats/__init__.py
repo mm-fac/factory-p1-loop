@@ -3,6 +3,7 @@
 from textstats.stats import (
     average_word_length,
     char_count,
+    line_count,
     longest_word,
     most_common_word,
     paragraph_count,
@@ -15,6 +16,7 @@ from textstats.stats import (
 __all__ = [
     "average_word_length",
     "char_count",
+    "line_count",
     "longest_word",
     "most_common_word",
     "paragraph_count",

@@ -3,6 +3,7 @@ import pytest
 from textstats import (
     average_word_length,
     char_count,
+    line_count,
     longest_word,
     most_common_word,
     paragraph_count,
@@ -149,6 +150,22 @@ class TestSentenceCount:
 
     def test_empty_string(self):
         assert sentence_count("") == 0
+
+
+class TestLineCount:
+    def test_multi_line_text_with_blank_lines_interspersed(self):
+        text = "First line.\n\nSecond line.\n   \nThird line."
+
+        assert line_count(text) == 3
+
+    def test_single_line_without_trailing_newline(self):
+        assert line_count("Only line.") == 1
+
+    def test_whitespace_only_lines(self):
+        assert line_count("   \n\t\n  ") == 0
+
+    def test_empty_string(self):
+        assert line_count("") == 0
 
 
 class TestParagraphCount:
