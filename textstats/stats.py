@@ -9,6 +9,14 @@ def word_count(text: str) -> int:
     return len(text.split())
 
 
+def longest_word(text: str) -> str:
+    """Return the longest word in *text*.
+
+    Words are separated by whitespace.
+    """
+    return max(text.split(), key=len, default="")
+
+
 def reading_time(text: str, wpm: int = 200) -> float:
     """Return the estimated reading time for *text* in minutes.
 

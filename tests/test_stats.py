@@ -1,6 +1,6 @@
 import pytest
 
-from textstats import char_count, reading_time, sentence_count, word_count
+from textstats import char_count, longest_word, reading_time, sentence_count, word_count
 
 
 class TestWordCount:
@@ -27,6 +27,23 @@ class TestWordCount:
 
     def test_whitespace_only_string(self):
         assert word_count("  \n\t  ") == 0
+
+
+class TestLongestWord:
+    def test_returns_longest_word(self):
+        assert longest_word("the quick brown fox") == "quick"
+
+    def test_tie_returns_first_longest_word(self):
+        assert longest_word("one two six") == "one"
+
+    def test_single_word(self):
+        assert longest_word("hello") == "hello"
+
+    def test_empty_string(self):
+        assert longest_word("") == ""
+
+    def test_whitespace_only_string(self):
+        assert longest_word("  \n\t  ") == ""
 
 
 class TestReadingTime:
