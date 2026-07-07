@@ -45,7 +45,12 @@ def sentence_count(text: str) -> int:
     if not text.strip():
         return 0
     count = 0
+    in_terminator_run = False
     for ch in text:
         if ch in ".!?":
-            count += 1
+            if not in_terminator_run:
+                count += 1
+                in_terminator_run = True
+        else:
+            in_terminator_run = False
     return max(count, 1)

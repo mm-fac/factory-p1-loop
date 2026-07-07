@@ -86,6 +86,12 @@ class TestSentenceCount:
     def test_multiple_sentences(self):
         assert sentence_count("One. Two! Three?") == 3
 
+    def test_ellipsis_counts_as_one_boundary(self):
+        assert sentence_count("Wait... What?!") == 2
+
+    def test_question_exclamation_run_counts_as_one_boundary(self):
+        assert sentence_count("Really?! Yes.") == 2
+
     def test_no_terminator_counts_as_one(self):
         assert sentence_count("no punctuation here") == 1
 
