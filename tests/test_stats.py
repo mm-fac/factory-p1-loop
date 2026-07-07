@@ -1,4 +1,6 @@
-from textstats import char_count, sentence_count, word_count
+import pytest
+
+from textstats import char_count, reading_time, sentence_count, word_count
 
 
 class TestWordCount:
@@ -25,6 +27,28 @@ class TestWordCount:
 
     def test_whitespace_only_string(self):
         assert word_count("  \n\t  ") == 0
+
+
+class TestReadingTime:
+    def test_estimates_minutes_from_word_count(self):
+        assert reading_time("word " * 100) == 0.5
+
+    def test_uses_custom_words_per_minute(self):
+        assert reading_time("one two three", wpm=60) == 0.05
+
+    def test_empty_string(self):
+        assert reading_time("") == 0.0
+
+    def test_whitespace_only_string(self):
+        assert reading_time("  \n\t  ") == 0.0
+
+    def test_non_positive_wpm_raises_value_error(self):
+        with pytest.raises(ValueError):
+            reading_time("words", wpm=0)
+
+    def test_negative_wpm_raises_value_error(self):
+        with pytest.raises(ValueError):
+            reading_time("words", wpm=-1)
 
 
 class TestCharCount:
