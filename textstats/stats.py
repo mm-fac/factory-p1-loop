@@ -9,6 +9,14 @@ def word_count(text: str) -> int:
     return len(text.split())
 
 
+def unique_word_count(text: str) -> int:
+    """Return the number of distinct words in *text*.
+
+    Words are separated by whitespace and compared case-insensitively.
+    """
+    return len({word.casefold() for word in text.split()})
+
+
 def average_word_length(text: str) -> float:
     """Return the average word length in *text*.
 

@@ -6,6 +6,7 @@ from textstats.stats import (
     longest_word,
     reading_time,
     sentence_count,
+    unique_word_count,
     word_count,
 )
 
@@ -15,5 +16,6 @@ __all__ = [
     "longest_word",
     "reading_time",
     "sentence_count",
+    "unique_word_count",
     "word_count",
 ]
