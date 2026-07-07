@@ -5,6 +5,7 @@ from textstats import (
     char_count,
     longest_word,
     most_common_word,
+    paragraph_count,
     reading_time,
     sentence_count,
     unique_word_count,
@@ -148,6 +149,32 @@ class TestSentenceCount:
 
     def test_empty_string(self):
         assert sentence_count("") == 0
+
+
+class TestParagraphCount:
+    def test_multi_paragraph_text(self):
+        text = "First paragraph.\nStill first.\n\nSecond paragraph."
+
+        assert paragraph_count(text) == 2
+
+    def test_multiple_consecutive_blank_lines_separate_paragraphs(self):
+        text = "First paragraph.\n\n   \n\t\nSecond paragraph."
+
+        assert paragraph_count(text) == 2
+
+    def test_single_paragraph(self):
+        assert paragraph_count("One paragraph.\nStill the same paragraph.") == 1
+
+    def test_leading_and_trailing_blank_lines_are_ignored(self):
+        text = "\n  \nOnly paragraph.\n\n"
+
+        assert paragraph_count(text) == 1
+
+    def test_empty_string(self):
+        assert paragraph_count("") == 0
+
+    def test_whitespace_only_string(self):
+        assert paragraph_count("  \n\t  ") == 0
 
 
 class TestCli:

@@ -86,3 +86,20 @@ def sentence_count(text: str) -> int:
         else:
             in_terminator_run = False
     return max(count, 1)
+
+
+def paragraph_count(text: str) -> int:
+    """Return the number of paragraphs in *text*.
+
+    Paragraphs are separated by one or more blank lines.
+    """
+    count = 0
+    in_paragraph = False
+    for line in text.splitlines():
+        if line.strip():
+            if not in_paragraph:
+                count += 1
+                in_paragraph = True
+        else:
+            in_paragraph = False
+    return count
