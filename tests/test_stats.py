@@ -74,3 +74,47 @@ class TestSentenceCount:
 
     def test_empty_string(self):
         assert sentence_count("") == 0
+
+
+class TestCli:
+    def test_prints_stats_as_json(self, tmp_path):
+        import json
+        import subprocess
+        import sys
+
+        text_file = tmp_path / "sample.txt"
+        text_file.write_text("Hello world. Bye!", encoding="utf-8")
+
+        result = subprocess.run(
+            [sys.executable, "-m", "textstats", str(text_file)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        assert result.returncode == 0
+        assert result.stderr == ""
+        assert json.loads(result.stdout) == {
+            "word_count": 3,
+            "char_count": 15,
+            "sentence_count": 2,
+            "reading_time": 0.015,
+        }
+
+    def test_missing_file_exits_with_error(self, tmp_path):
+        import subprocess
+        import sys
+
+        missing_file = tmp_path / "missing.txt"
+
+        result = subprocess.run(
+            [sys.executable, "-m", "textstats", str(missing_file)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+        assert result.returncode == 1
+        assert result.stdout == ""
+        assert "error: could not read" in result.stderr
+        assert str(missing_file) in result.stderr
