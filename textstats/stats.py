@@ -40,6 +40,21 @@ def average_word_length(text: str) -> float:
     return sum(len(word) for word in words) / len(words)
 
 
+def median_word_length(text: str) -> float:
+    """Return the median word length in *text*.
+
+    Words are separated by whitespace. For an even number of words the
+    mean of the two middle lengths is returned.
+    """
+    lengths = sorted(len(word) for word in text.split())
+    if not lengths:
+        return 0.0
+    middle = len(lengths) // 2
+    if len(lengths) % 2 == 1:
+        return float(lengths[middle])
+    return (lengths[middle - 1] + lengths[middle]) / 2
+
+
 def longest_word(text: str) -> str:
     """Return the longest word in *text*.
 

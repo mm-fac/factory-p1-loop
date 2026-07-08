@@ -5,6 +5,7 @@ from textstats import (
     char_count,
     line_count,
     longest_word,
+    median_word_length,
     most_common_word,
     paragraph_count,
     reading_time,
@@ -80,6 +81,23 @@ class TestAverageWordLength:
 
     def test_whitespace_only_string(self):
         assert average_word_length("  \n\t  ") == 0.0
+
+
+class TestMedianWordLength:
+    def test_odd_count_returns_middle_length(self):
+        assert median_word_length("a bb cccc") == 2.0
+
+    def test_even_count_returns_mean_of_two_middle_lengths(self):
+        assert median_word_length("a bb ccc dddd") == 2.5
+
+    def test_single_word(self):
+        assert median_word_length("hello") == 5.0
+
+    def test_empty_string(self):
+        assert median_word_length("") == 0.0
+
+    def test_whitespace_only_string(self):
+        assert median_word_length("  \n\t  ") == 0.0
 
 
 class TestLongestWord:
