@@ -11,6 +11,7 @@ from textstats import (
     sentence_count,
     unique_word_count,
     word_count,
+    word_frequencies,
 )
 
 
@@ -49,6 +50,22 @@ class TestUniqueWordCount:
 
     def test_empty_string(self):
         assert unique_word_count("") == 0
+
+
+class TestWordFrequencies:
+    def test_counts_mixed_case_repeats_with_lowercase_keys(self):
+        assert word_frequencies("The quick THE the") == {"the": 3, "quick": 1}
+
+    def test_preserves_first_occurrence_order(self):
+        frequencies = word_frequencies("Beta alpha ALPHA beta gamma")
+
+        assert list(frequencies) == ["beta", "alpha", "gamma"]
+
+    def test_empty_string(self):
+        assert word_frequencies("") == {}
+
+    def test_whitespace_only_string(self):
+        assert word_frequencies("  \n\t  ") == {}
 
 
 class TestAverageWordLength:

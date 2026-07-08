@@ -11,6 +11,7 @@ from textstats.stats import (
     sentence_count,
     unique_word_count,
     word_count,
+    word_frequencies,
 )
 
 __all__ = [
@@ -24,4 +25,5 @@ __all__ = [
     "sentence_count",
     "unique_word_count",
     "word_count",
+    "word_frequencies",
 ]
