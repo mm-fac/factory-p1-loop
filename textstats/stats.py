@@ -17,6 +17,18 @@ def unique_word_count(text: str) -> int:
     return len({word.casefold() for word in text.split()})
 
 
+def word_frequencies(text: str) -> dict[str, int]:
+    """Return per-word counts for *text*.
+
+    Words are separated by whitespace and compared case-insensitively.
+    """
+    counts: dict[str, int] = {}
+    for word in text.split():
+        normalized = word.casefold()
+        counts[normalized] = counts.get(normalized, 0) + 1
+    return counts
+
+
 def average_word_length(text: str) -> float:
     """Return the average word length in *text*.
 
