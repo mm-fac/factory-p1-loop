@@ -1,6 +1,7 @@
 import pytest
 
 from textstats import (
+    __version__,
     average_sentence_length,
     average_word_length,
     char_count,
@@ -17,6 +18,11 @@ from textstats import (
     word_count,
     word_frequencies,
 )
+
+
+def test_version_is_non_empty_string():
+    assert isinstance(__version__, str)
+    assert __version__
 
 
 class TestWordCount:
