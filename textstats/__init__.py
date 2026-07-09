@@ -1,6 +1,7 @@
 """textstats — tiny text statistics library."""
 
 from textstats.stats import (
+    average_sentence_length,
     average_word_length,
     char_count,
     line_count,
@@ -16,6 +17,7 @@ from textstats.stats import (
 )
 
 __all__ = [
+    "average_sentence_length",
     "average_word_length",
     "char_count",
     "line_count",
