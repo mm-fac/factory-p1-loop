@@ -29,6 +29,17 @@ def word_frequencies(text: str) -> dict[str, int]:
     return counts
 
 
+def average_sentence_length(text: str) -> float:
+    """Return the average sentence length in words for *text*.
+
+    Sentence length is based on whitespace-separated words per sentence.
+    """
+    sentences = sentence_count(text)
+    if sentences == 0:
+        return 0.0
+    return word_count(text) / sentences
+
+
 def average_word_length(text: str) -> float:
     """Return the average word length in *text*.
 

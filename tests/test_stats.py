@@ -1,6 +1,7 @@
 import pytest
 
 from textstats import (
+    average_sentence_length,
     average_word_length,
     char_count,
     line_count,
@@ -67,6 +68,17 @@ class TestWordFrequencies:
 
     def test_whitespace_only_string(self):
         assert word_frequencies("  \n\t  ") == {}
+
+
+class TestAverageSentenceLength:
+    def test_multi_sentence_text(self):
+        assert average_sentence_length("One two. Three four five!") == 2.5
+
+    def test_single_sentence(self):
+        assert average_sentence_length("One two three") == 3.0
+
+    def test_empty_string(self):
+        assert average_sentence_length("") == 0.0
 
 
 class TestAverageWordLength:
