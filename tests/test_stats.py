@@ -11,6 +11,7 @@ from textstats import (
     paragraph_count,
     reading_time,
     sentence_count,
+    top_words,
     unique_word_count,
     word_count,
     word_frequencies,
@@ -68,6 +69,20 @@ class TestWordFrequencies:
 
     def test_whitespace_only_string(self):
         assert word_frequencies("  \n\t  ") == {}
+
+
+class TestTopWords:
+    def test_returns_words_ordered_by_descending_count(self):
+        assert top_words("red blue red green blue red") == ["red", "blue", "green"]
+
+    def test_tie_returns_earliest_first_occurrence(self):
+        assert top_words("beta alpha alpha beta gamma", n=2) == ["beta", "alpha"]
+
+    def test_n_larger_than_vocabulary_returns_all_words(self):
+        assert top_words("one two two", n=5) == ["two", "one"]
+
+    def test_empty_string(self):
+        assert top_words("") == []
 
 
 class TestAverageSentenceLength:

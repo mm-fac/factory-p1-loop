@@ -29,6 +29,15 @@ def word_frequencies(text: str) -> dict[str, int]:
     return counts
 
 
+def top_words(text: str, n: int = 3) -> list[str]:
+    """Return the *n* most frequent words in *text*.
+
+    Words are separated by whitespace and compared case-insensitively.
+    """
+    counts = word_frequencies(text)
+    return sorted(counts, key=lambda word: -counts[word])[:n]
+
+
 def average_sentence_length(text: str) -> float:
     """Return the average sentence length in words for *text*.
 
