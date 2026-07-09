@@ -17,6 +17,18 @@ def unique_word_count(text: str) -> int:
     return len({word.casefold() for word in text.split()})
 
 
+def vocabulary_richness(text: str) -> float:
+    """Return the ratio of unique words to total words in *text*.
+
+    Words are separated by whitespace and compared case-insensitively.
+    Returns 0.0 when there are no words.
+    """
+    total = word_count(text)
+    if total == 0:
+        return 0.0
+    return unique_word_count(text) / total
+
+
 def word_frequencies(text: str) -> dict[str, int]:
     """Return per-word counts for *text*.
 
