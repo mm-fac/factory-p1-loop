@@ -13,6 +13,7 @@ from textstats import (
     sentence_count,
     top_words,
     unique_word_count,
+    vocabulary_richness,
     word_count,
     word_frequencies,
 )
@@ -53,6 +54,20 @@ class TestUniqueWordCount:
 
     def test_empty_string(self):
         assert unique_word_count("") == 0
+
+
+class TestVocabularyRichness:
+    def test_all_unique_text_returns_one(self):
+        assert vocabulary_richness("one two three") == 1.0
+
+    def test_repeated_words_returns_ratio(self):
+        assert vocabulary_richness("the the quick fox") == 0.75
+
+    def test_single_word(self):
+        assert vocabulary_richness("hello") == 1.0
+
+    def test_empty_string(self):
+        assert vocabulary_richness("") == 0.0
 
 
 class TestWordFrequencies:

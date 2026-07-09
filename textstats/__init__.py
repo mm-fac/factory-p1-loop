@@ -13,6 +13,7 @@ from textstats.stats import (
     sentence_count,
     top_words,
     unique_word_count,
+    vocabulary_richness,
     word_count,
     word_frequencies,
 )
@@ -30,6 +31,7 @@ __all__ = [
     "sentence_count",
     "top_words",
     "unique_word_count",
+    "vocabulary_richness",
     "word_count",
     "word_frequencies",
 ]
